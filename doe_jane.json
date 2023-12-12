@@ -1,0 +1,24 @@
+{
+    "patient_name" : "Doe, Jane L",
+    "birth_date": "1967-12-01",
+    "gender": "Female",
+    "height": "60 in.",
+    "weight": "67 kg",
+    "PCP": "Bill D. McAllister, MD",
+    "summary": ["Jane L. Doe, born on December 1, 1967, is a 60-inch tall female weighing 67 kg. Her primary care physician is Bill D. McAllister, MD. Jane is currently taking levothyroxine and gabapentin, received Pfizer COVID-19 vaccines on November 1, 2021, and February 23, 2022, underwent Hemithyroidectomy on December 3, 1991, and Hysterectomy on May 1, 2005, and has chronic conditions including alcohol abuse (ICD-10: F10.10) and dementia (ICD-10: F03.94)."],
+    "medications": {
+        "name": ["levothyroxine 50 mcg tablet", "gabapentin (NEURONTIN) 100 mg capsule"]
+    },
+    "vaccines": {
+        "name": ["Pfizer COVID-19", "Pfizer COVID-19"], 
+        "date": ["2021-11-01", "2022-02-23"]
+    },
+    "surgeries": {
+        "name": ["Hemithyroidectomy", "Hysterectomy"],
+        "date": ["1991-12-03", "2005-5-01"]
+    },
+    "chronic_conditions": {
+        "name": ["Alcohol abuse", "Dementia"],
+        "ICD-10": ["F10.10", "F03.94"]
+    }
+}

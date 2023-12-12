@@ -1,0 +1,24 @@
+{
+    "patient_name" : "Smith, Ann L",
+    "birth_date": "1972-12-01",
+    "gender": "Female",
+    "height": "64 in.",
+    "weight": "74 kg",
+    "PCP": "Bill D. McAllister, MD",
+    "summary": ["Ann L. Smith, born on December 1, 1972, is a 64-inch tall female weighing 74 kg. Her primary care physician is Bill D. McAllister, MD. Ann is currently taking albuterol and metformin, received Pfizer COVID-19 and Influenza A/B vaccines on January 1, 2022, and February 23, 2023, underwent an appendectomy on February 3, 1999, and a mastectomy on May 10, 2010. She has chronic conditions including hypertension (ICD-10: I10) and prediabetes (ICD-10: R73.09)."],
+    "medications": {
+        "name": ["albuterol 50 mcg tablet", "metformin 100 mg capsule"]
+    },
+    "vaccines": {
+        "name": ["Pfizer COVID-19", "Influenza A/B"], 
+        "date": ["2022-01-01", "2023-02-23"]
+    },
+    "surgeries": {
+        "name": ["Appendectomy", "Mastectomy"],
+        "date": ["1999-02-03", "2010-5-10"]
+    },
+    "chronic_conditions": {
+        "name": ["Hypertension", "Prediabetes"],
+        "ICD-10": ["I10", "R73.09"]
+    }
+}
