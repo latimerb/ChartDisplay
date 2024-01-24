@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-...your-sha-hash" crossorigin="anonymous" />
     <title>Patient Information</title>
     <style>
         /* Styles remain the same as in the previous example */
@@ -98,25 +100,12 @@
     <!-- Notes content will be dynamically added here using JavaScript -->
 </div>
 
+
 <script>
-    function displayText() {
-         // Get the value entered by the user
-         var userInput = document.getElementById("textInput").value;
-
-         // Display the entered text
-         document.getElementById("output").innerText = userInput;
-    }
-
-    function moveCursor() {
-      // Move the cursor to the beginning of the text input
-      var inputElement = document.getElementById("textInput");
-      inputElement.selectionStart = 0;
-      inputElement.selectionEnd = 0;
-
-    }
 
     // Function to fetch and display patient data
     function displayPatientData() {
+        
         // Get the selected JSON file from the dropdown
         const selectedPatientFile = document.getElementById('patientDropdown').value;
 
@@ -134,22 +123,104 @@
                     <p>${data.gender}</p>
                 `;
 
-                // Display medications
-                document.getElementById('medicationsBox').innerHTML = `
-                    <h3>Medications:</h3>
-                    <ul>
-                        ${data.medications.name.map(medication => `<li>${medication}</li>`).join('')}
-                    </ul>
-                `;
+            
+            
+        // Display "Medications" header
+        document.getElementById('medicationsBox').innerHTML = `
+            <h3>Medications: 
+            <label>
+            <input type="radio" name="applyCondition" value="no" checked onchange="displayMedicationData(false)"> All
+            </label>
+            <label>
+            <input type="radio" name="applyCondition" value="yes" onchange="displayMedicationData(true)"> Eye
+            </label></h3>
+        `;
+        displayMedicationData(false);
 
-                // Display notes
-                document.getElementById('notesBox').innerHTML = `
-                    <h3>Notes:</h3>
-  		    <textarea style="height:100px; width:350px;" onclick="moveCursor()" id="textInput"></textarea>
-                `;
-            })
-            .catch(error => console.error('Error fetching patient data:', error));
+        // Display notes
+        document.getElementById('notesBox').innerHTML = `
+            <h2 style="display: flex; justify-content: space-between; align-items: center;">Notes <button onclick="importNotes()">Import from chart</button></h2>
+  		    <textarea style="height:100px; width:350px;" id="textInput"></textarea>
+            <br><button onclick="printNotes()">Print</button>
+        `;
+        })
     }
+
+    // Function to display the list of medications
+    function displayMedicationData(applyCondition) {
+    // Fetch patient data from the selected JSON file
+    const selectedPatientFile = document.getElementById('patientDropdown').value;
+
+    fetch(selectedPatientFile)
+        .then(response => response.json())
+        .then(data => {
+            // Filter medications based on type 'eye'
+            const filteredMedications = applyCondition
+                ? data.medications.name.filter((medication, index) => data.medications.type[index] === 'eye')
+                : data.medications.name;
+            
+            // Display filtered medications
+            const medicationsBox = document.getElementById('medicationsBox');
+            medicationsBox.innerHTML = ''; // Clear existing content
+            medicationsBox.innerHTML = `
+                <h2 style="display: flex; justify-content: space-between; align-items: center;">Medications
+                    <div style="display: flex; gap: 10px;">
+                        <label>
+                            <input type="radio" name="applyCondition" value="no" ${!applyCondition ? 'checked' : ''} onchange="displayMedicationData(false)"> All
+                        </label>
+                        <label>
+                            <input type="radio" name="applyCondition" value="yes" ${applyCondition ? 'checked' : ''} onchange="displayMedicationData(true)"> <i class="fas fa-eye"></i>
+                        </label>
+                    </div>
+                </h2>
+                ${filteredMedications.map((medication, index) => `
+                    <p>${medication} ${data.medications.type[index] === 'eye' ? '<i class="fas fa-eye"></i>' : ''}</p>
+                `).join('')}
+            `;
+        })
+        .catch(error => console.error('Error fetching patient data:', error));
+    }
+
+    function importNotes() {
+        const selectedPatientFile = document.getElementById('patientDropdown').value;
+
+        fetch(selectedPatientFile)
+        .then(response => response.json())
+        .then(data => {
+            // Get the textarea element by its ID
+            const notesTextarea = document.getElementById('textInput');
+            
+            // Set the textarea value to the notes text from the fetched data
+            notesTextarea.value = data.notes.text;
+        })
+        .catch(error => console.error('Error fetching patient data:', error));
+    }
+
+
+    function printNotes() {
+        // Get the value entered in the "Notes" textarea
+        var notesText = document.getElementById("textInput").value;
+
+        // Replace newline characters with HTML line breaks
+        notesText = notesText.replace(/\n/g, '<br>');
+
+        // Create a new window for printing
+        var printWindow = window.open('', '_blank');
+
+        // Add the notes text to the new window content
+        printWindow.document.write('<html><head><title>Print Notes</title></head><body>');
+        printWindow.document.write('<h2>Notes</h2>');
+        printWindow.document.write('<p>' + notesText + '</p>');
+        printWindow.document.write('</body></html>');
+
+        // Close the new window after printing
+        printWindow.document.close();
+        printWindow.print();
+        printWindow.close();
+    }   
+
+
+
 </script>
 
 </body>

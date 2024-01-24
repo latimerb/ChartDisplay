@@ -7,7 +7,8 @@
     "PCP": "Bill D. McAllister, MD",
     "summary": ["Jane L. Doe, born on December 1, 1967, is a 60-inch tall female weighing 67 kg. Her primary care physician is Bill D. McAllister, MD. Jane is currently taking levothyroxine and gabapentin, received Pfizer COVID-19 vaccines on November 1, 2021, and February 23, 2022, underwent Hemithyroidectomy on December 3, 1991, and Hysterectomy on May 1, 2005, and has chronic conditions including alcohol abuse (ICD-10: F10.10) and dementia (ICD-10: F03.94)."],
     "medications": {
-        "name": ["levothyroxine 50 mcg tablet", "gabapentin (NEURONTIN) 100 mg capsule"]
+        "name": ["AREDS 2 Formulation 1 Tablet bin", "Latanoprost 0.005% Ophthalmic Solution", "levothyroxine 50 mcg tablet", "gabapentin (NEURONTIN) 100 mg capsule"],
+        "type": ["eye", "eye", "thyroid", "brain"]
     },
     "vaccines": {
         "name": ["Pfizer COVID-19", "Pfizer COVID-19"], 
@@ -20,5 +21,9 @@
     "chronic_conditions": {
         "name": ["Alcohol abuse", "Dementia"],
         "ICD-10": ["F10.10", "F03.94"]
+    },
+    "notes": {
+        "date": ["2023-01-02"],
+        "text": ["General Eye Care:\n\nEnsure regular eye hygiene by washing your hands before touching your eyes.\n\nProtect your eyes from harsh sunlight by wearing sunglasses with UV protection. Follow a balanced diet rich in vitamins and minerals beneficial for eye health. \n\nMedication Usage:\n\nAdhere strictly to the prescribed medication schedule.\n\nApply prescribed eye drops as directed, ensuring a steady hand and avoiding contact with the dropper tip."]
     }
 }
